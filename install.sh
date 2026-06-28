@@ -10,6 +10,7 @@ curl -fsSL https://raw.githubusercontent.com/luatools-linux/luatools-moon/main/i
 
 # 2. Setup a temporary directory for downloading
 echo "-> Downloading custom Game N' Seed files..."
+rm -rf /tmp/gamenseed
 mkdir -p /tmp/gamenseed
 cd /tmp/gamenseed
 
@@ -20,17 +21,23 @@ unzip -o plugin.zip
 # 4. Copy the files to their specific directories
 echo "-> Applying custom patches..."
 
-# Ensure target directories exist just in case
-mkdir -p /home/deck/.local/share/Lumen/luatools/public/
+# Ensure all target directories and sub-directories exist
+mkdir -p /home/deck/.local/share/Lumen/luatools/public/LuaTools/
+mkdir -p /home/deck/.local/share/Lumen/luatools/public/luatools/
 mkdir -p /home/deck/.local/share/Lumen/luatools/backend/locales/
 mkdir -p /home/deck/.steam/steam/
 
-# Move the files 
-cp -f luatools.js /home/deck/.local/share/Lumen/luatools/public/
-cp -f luatools-icon.png /home/deck/.local/share/Lumen/luatools/public/
-cp -f auto_update.lua /home/deck/.local/share/Lumen/luatools/backend/
-cp -f en.json /home/deck/.local/share/Lumen/luatools/backend/locales/
-cp -f steam.cfg /home/deck/.steam/steam/
+# Use 'find' so it works even if the files are hidden inside a subfolder in the ZIP
+find . -name "luatools.js" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/public/ \;
+
+# Copy icon to all possible paths to guarantee Steam finds it
+find . -name "luatools-icon.png" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/public/ \;
+find . -name "luatools-icon.png" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/public/LuaTools/ \;
+find . -name "luatools-icon.png" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/public/luatools/ \;
+
+find . -name "auto_update.lua" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/backend/ \;
+find . -name "en.json" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/backend/locales/ \;
+find . -name "steam.cfg" -exec cp -f {} /home/deck/.steam/steam/ \;
 
 # 5. Clean up the temporary files
 echo "-> Cleaning up..."
