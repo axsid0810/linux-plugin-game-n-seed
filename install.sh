@@ -25,15 +25,16 @@ mkdir -p /home/deck/.local/share/Lumen/luatools/public/
 mkdir -p /home/deck/.local/share/Lumen/luatools/backend/locales/
 mkdir -p /home/deck/.steam/steam/
 
-# Move the files (assuming the files are sitting loosely inside the zip, not inside a subfolder)
+# Move the files 
 cp -f luatools.js /home/deck/.local/share/Lumen/luatools/public/
-cp -f icon.ico /home/deck/.local/share/Lumen/luatools/public/
+cp -f luatools-icon.png /home/deck/.local/share/Lumen/luatools/public/
 cp -f auto_update.lua /home/deck/.local/share/Lumen/luatools/backend/
 cp -f en.json /home/deck/.local/share/Lumen/luatools/backend/locales/
 cp -f steam.cfg /home/deck/.steam/steam/
 
 # 5. Clean up the temporary files
 echo "-> Cleaning up..."
+cd ~
 rm -rf /tmp/gamenseed
 
 echo "==========================================="
