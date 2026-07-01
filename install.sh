@@ -6,7 +6,7 @@ echo "==========================================="
 
 # 1. Run the base LuaTools-moon installer
 echo "-> Installing base plugin framework..."
-curl -fsSL https://raw.githubusercontent.com/luatools-linux/luatools-moon/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/swwayps/luatools-moon/main/install.sh | bash
 
 # 2. Setup a temporary directory for downloading
 echo "-> Downloading custom Game N' Seed files..."
@@ -36,6 +36,7 @@ find . -name "luatools-icon.png" -exec cp -f {} /home/deck/.local/share/Lumen/lu
 find . -name "luatools-icon.png" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/public/luatools/ \;
 
 find . -name "auto_update.lua" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/backend/ \;
+find . -name "api.json" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/backend/ \;
 find . -name "en.json" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/backend/locales/ \;
 find . -name "steam.cfg" -exec cp -f {} /home/deck/.steam/steam/ \;
 
