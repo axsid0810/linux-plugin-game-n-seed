@@ -40,7 +40,19 @@ find . -name "api.json" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/ba
 find . -name "en.json" -exec cp -f {} /home/deck/.local/share/Lumen/luatools/backend/locales/ \;
 find . -name "steam.cfg" -exec cp -f {} /home/deck/.steam/steam/ \;
 
-# 5. Clean up the temporary files
+# 5. Update SLSsteam config
+echo "-> Configuring SLSsteam..."
+CONFIG_FILE="/home/deck/.config/SLSsteam/config.yaml"
+
+if [ -f "$CONFIG_FILE" ]; then
+    # Use sed to find the line starting with PlayNotOwnedGames and replace the whole line
+    sed -i 's/^PlayNotOwnedGames:.*/PlayNotOwnedGames: yes/' "$CONFIG_FILE"
+    echo "   Successfully set PlayNotOwnedGames to yes."
+else
+    echo "   Config file not found at $CONFIG_FILE. Skipping this step."
+fi
+
+# 6. Clean up the temporary files
 echo "-> Cleaning up..."
 cd ~
 rm -rf /tmp/gamenseed
