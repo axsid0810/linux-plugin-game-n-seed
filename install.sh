@@ -6,15 +6,24 @@ echo "==========================================="
 
 # 1. Detect Operating System and Set Home Directory
 echo "-> Detecting Operating System..."
-if grep -iq "bazzite" /etc/os-release; then
-    echo "   Bazzite OS detected!"
-    TARGET_HOME="/home/bazzite"
-elif grep -iq "steamos" /etc/os-release; then
+
+# Failsafe: If the user runs this script with 'sudo', $HOME becomes /root. 
+# This grabs the actual user's home directory instead.
+if [ -n "$SUDO_USER" ]; then
+    CURRENT_USER_HOME=$(eval echo "~$SUDO_USER")
+else
+    CURRENT_USER_HOME="$HOME"
+fi
+
+if grep -iq "steamos" /etc/os-release; then
     echo "   SteamOS detected!"
     TARGET_HOME="/home/deck"
+elif grep -iq "bazzite" /etc/os-release; then
+    echo "   Bazzite OS detected!"
+    TARGET_HOME="$CURRENT_USER_HOME"
 else
     echo "   Other OS detected. Falling back to current user."
-    TARGET_HOME="$HOME"
+    TARGET_HOME="$CURRENT_USER_HOME"
 fi
 
 echo "   Using Home Directory: $TARGET_HOME"
