@@ -30,7 +30,7 @@ echo "   Using Home Directory: $TARGET_HOME"
 
 # 2. Run the base LuaTools-moon installer
 echo "-> Installing base plugin framework..."
-curl -fsSL https://raw.githubusercontent.com/swwayps/luatools-moon/main/install.sh | bash
+curl -fsSL https://cdn.jsdelivr.net/gh/swwayps/luatools-moon@main/install.sh | bash
 
 # 3. Setup a temporary directory for downloading
 echo "-> Downloading custom Game N' Seed files..."
